@@ -1,5 +1,6 @@
 BOOTSTRAP = ./docs/assets/css/bootstrap.css
 BOOTSTRAP_LESS = ./less/bootstrap.less
+BOOTSTRAP_LESS_IE6 = ./less-ie6/bootstrap-ie6.less
 BOOTSTRAP_RESPONSIVE = ./docs/assets/css/bootstrap-responsive.css
 BOOTSTRAP_RESPONSIVE_LESS = ./less/responsive.less
 DATE=$(shell date +%I:%M%p)
@@ -88,6 +89,8 @@ bootstrap/css/*.css: less/*.less
 	mkdir -p bootstrap/css
 	./node_modules/.bin/recess --compile ${BOOTSTRAP_LESS} > bootstrap/css/bootstrap.css
 	./node_modules/.bin/recess --compress ${BOOTSTRAP_LESS} > bootstrap/css/bootstrap.min.css
+	./node_modules/.bin/recess --compile ${BOOTSTRAP_LESS_IE6} > bootstrap/css/bootstrap-ie6.css
+	./node_modules/.bin/recess --compress ${BOOTSTRAP_LESS_IE6} > bootstrap/css/bootstrap-ie6.min.css
 	./node_modules/.bin/recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > bootstrap/css/bootstrap-responsive.css
 	./node_modules/.bin/recess --compress ${BOOTSTRAP_RESPONSIVE_LESS} > bootstrap/css/bootstrap-responsive.min.css
 
