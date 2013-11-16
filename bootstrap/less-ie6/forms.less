@@ -168,7 +168,6 @@ input[type="checkbox"] {
   *margin-top: 0; /* IE7 */
   margin-top: 1px \9; /* IE8-9 */
   line-height: normal;
-  cursor: pointer;
 }
 
 // Reset width of input images, buttons, radios, checkboxes
@@ -425,9 +424,9 @@ textarea[class*="span"],
 
 // HTML5 invalid states
 // Shares styles with the .control-group.error above
-input:focus:required:invalid,
-textarea:focus:required:invalid,
-select:focus:required:invalid {
+input:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid {
   color: #b94a48;
   border-color: #ee5f5b;
   &:focus {
@@ -481,7 +480,9 @@ select:focus:required:invalid {
 // Allow us to put symbols and text within the input field for a cleaner look
 .input-append,
 .input-prepend {
-  margin-bottom: 5px;
+  display: inline-block;
+  margin-bottom: @baseLineHeight / 2;
+  vertical-align: middle;
   font-size: 0; // white space collapse hack
   white-space: nowrap; // Prevent span and input from separating
 
@@ -489,7 +490,8 @@ select:focus:required:invalid {
   input,
   select,
   .uneditable-input,
-  .dropdown-menu {
+  .dropdown-menu,
+  .popover {
     font-size: @baseFontSize;
   }
 
@@ -519,13 +521,13 @@ select:focus:required:invalid {
     text-shadow: 0 1px 0 @white;
     background-color: @grayLighter;
     border: 1px solid #ccc;
-
   }
   .add-on,
-  .btn {
+  .btn,
+  .btn-group .dropdown-toggle {
     vertical-align: top;
     .border-radius(0);
-    
+
     *margin-top: 1px;
   }
   .active {
@@ -552,7 +554,7 @@ select:focus:required:invalid {
   select,
   .uneditable-input {
     .border-radius(@inputBorderRadius 0 0 @inputBorderRadius);
-    + .btn-group .btn {
+    + .btn-group .btn:last-child {
       .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
     }
   }
@@ -563,7 +565,8 @@ select:focus:required:invalid {
     *margin-left: -2px;
   }
   .add-on:last-child,
-  .btn:last-child {
+  .btn:last-child,
+  .btn-group:last-child .dropdown-toggle {
     .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
   }
 }
@@ -736,7 +739,10 @@ legend + .control-group {
   // And apply it only to .help-block instances that follow a form control
   input,
   select,
-  textarea {
+  textarea,
+  .uneditable-input,
+  .input-prepend,
+  .input-append {
     + .help-block {
       margin-top: @baseLineHeight / 2;
     }

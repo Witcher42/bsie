@@ -10,7 +10,6 @@
 .navbar {
   overflow: visible;
   margin-bottom: @baseLineHeight;
-  color: @navbarText;
 
   // Fix for IE7's bad z-indexing so dropdowns don't appear below content that follows the navbar
   *position: relative;
@@ -21,7 +20,7 @@
 // Gradient is applied to its own element because overflow visible is not honored by IE when filter is present
 .navbar-inner {
   min-height: @navbarHeight;
-  
+
   _height: @navbarHeight;
 
   padding-left:  20px;
@@ -56,14 +55,15 @@
   // Vertically center the text given @navbarHeight
   padding: ((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
   margin-left: -20px; // negative indent to left-align the text down the page
-  
+
   _margin-left: -10px;
 
   font-size: 20px;
   font-weight: 200;
   color: @navbarBrandColor;
   text-shadow: 0 1px 0 @navbarBackgroundHighlight;
-  &:hover {
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 }
@@ -83,7 +83,8 @@
 // -------------------------
 .navbar-link {
   color: @navbarLinkColor;
-  &:hover {
+  &:hover,
+  &:focus {
     color: @navbarLinkColorHover;
   }
 }
@@ -105,7 +106,9 @@
 }
 .navbar .btn-group .btn,
 .navbar .input-prepend .btn,
-.navbar .input-append .btn {
+.navbar .input-append .btn,
+.navbar .input-prepend .btn-group,
+.navbar .input-append .btn-group {
   margin-top: 0; // then undo the margin here so we don't accidentally double it
 }
 
@@ -133,7 +136,7 @@
   }
   .input-append,
   .input-prepend {
-    margin-top: 6px;
+    margin-top: 5px;
     white-space: nowrap; // preven two  items from separating within a .navbar-form that has .pull-left
     input {
       margin-top: 0; // remove the margin on top since it's on the parent
@@ -290,7 +293,7 @@
 //.navbar .nav > li > a:hover {
 .navbar .nav li a:focus,
 .navbar .nav li a:hover {
-  background-color: @navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover from .active
+  background-color: @navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover/:focus from .active
   color: @navbarLinkColorHover;
   text-decoration: none;
 }
@@ -430,6 +433,13 @@
   }
 }
 
+// Caret should match text color on hover/focus
+.navbar .nav li.dropdown > a:hover .caret,
+.navbar .nav li.dropdown > a:focus .caret {
+  border-top-color: @navbarLinkColorHover;
+  border-bottom-color: @navbarLinkColorHover;
+}
+
 // Remove background color from open dropdown
 // .navbar .nav li.dropdown.open > .dropdown-toggle,
 // .navbar .nav li.dropdown.active > .dropdown-toggle,
@@ -484,7 +494,6 @@
 // -------------------------
 
 .navbar-inverse {
-  color: @navbarInverseText;
 
   .navbar-inner {
     #gradient > .vertical(@navbarInverseBackgroundHighlight, @navbarInverseBackground);
@@ -496,9 +505,18 @@
   .nav li a {
     color: @navbarInverseLinkColor;
     text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-    &:hover {
+    &:hover,
+    &:focus {
       color: @navbarInverseLinkColorHover;
     }
+  }
+
+  .brand {
+    color: @navbarInverseBrandColor;
+  }
+
+  .navbar-text {
+    color: @navbarInverseText;
   }
 
 //  .nav > li > a:focus,
@@ -522,7 +540,8 @@
   // Inline text links
   .navbar-link {
     color: @navbarInverseLinkColor;
-    &:hover {
+    &:hover,
+    &:focus {
       color: @navbarInverseLinkColorHover;
     }
   }
@@ -539,6 +558,11 @@
   .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: @navbarInverseLinkBackgroundActive;
     color: @navbarInverseLinkColorActive;
+  }
+  .nav li.dropdown > a:hover .caret,
+  .nav li.dropdown > a:focus .caret {
+    border-top-color: @navbarInverseLinkColorActive;
+    border-bottom-color: @navbarInverseLinkColorActive;
   }
   .nav li.dropdown > .dropdown-toggle .caret {
     border-top-color: @navbarInverseLinkColor;
@@ -581,6 +605,3 @@
   }
 
 }
-
-
-

@@ -108,11 +108,12 @@
 
 // Hover state
 // -----------
-
 .dropdown-menu li a:hover,
 .dropdown-menu li a:focus,
 .dropdown-submenu:hover a,
-.dropdown-submenu-hover a /* fix for IE6 li:hover */ {
+.dropdown-submenu:focus a,
+.dropdown-submenu-hover a, 
+.dropdown-submenu-focus a /* fix for IE6 li:hover */ {
   text-decoration: none;
   color: @dropdownLinkColorHover;
   #gradient > .vertical(@dropdownLinkBackgroundHover, darken(@dropdownLinkBackgroundHover, 5%));
@@ -129,7 +130,8 @@
 // Active state
 // ------------
 .dropdown-menu .active a,
-.dropdown-menu .active a:hover {
+.dropdown-menu .active a:hover,
+.dropdown-menu .active a:focus {
   color: @dropdownLinkColorActive;
   text-decoration: none;
   outline: 0;
@@ -140,11 +142,13 @@
 // --------------
 // Gray out text and ensure the hover state remains gray
 .dropdown-menu .disabled a,
-.dropdown-menu .disabled a:hover {
+.dropdown-menu .disabled a:hover,
+.dropdown-menu .disabled a:focus {
   color: @grayLight;
 }
 // Nuke hover effects
-.dropdown-menu .disabled a:hover {
+.dropdown-menu .disabled a:hover,
+.dropdown-menu .disabled a:focus {
   text-decoration: none;
   background-color: transparent;
 
@@ -153,6 +157,7 @@
   *filter:chroma(color=@transparentIE6);
 
   background-image: none; // Remove CSS gradient
+  .reset-filter();
   cursor: default;
 }
 
@@ -169,6 +174,17 @@
     /* fix for IE6 inline-block */
     *zoom:1;
   }
+}
+
+// Backdrop to catch body clicks on mobile, etc.
+// ---------------------------
+.dropdown-backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: @zindexDropdown - 10;
 }
 
 // Right aligned dropdowns
@@ -217,9 +233,7 @@
   left: 100%;
   margin-top: -6px;
   margin-left: -1px;
-  -webkit-border-radius: 0 6px 6px 6px;
-     -moz-border-radius: 0 6px 6px 6px;
-          border-radius: 0 6px 6px 6px;
+  .border-radius(0 6px 6px 6px);
 }
 .dropdown-submenu:hover .dropdown-menu,
 .dropdown-submenu-hover .dropdown-menu {
@@ -232,9 +246,7 @@
   bottom: 0;
   margin-top: 0;
   margin-bottom: -2px;
-  -webkit-border-radius: 5px 5px 5px 0;
-     -moz-border-radius: 5px 5px 5px 0;
-          border-radius: 5px 5px 5px 0;
+  .border-radius(5px 5px 5px 0);
 }
 
 // Caret to indicate there is a submenu
@@ -293,17 +305,13 @@
     left: -100%;
     margin-left: 10px;
     *margin-left: 18px;
-    -webkit-border-radius: 6px 0 6px 6px;
-       -moz-border-radius: 6px 0 6px 6px;
-            border-radius: 6px 0 6px 6px;
+    .border-radius(6px 0 6px 6px);
   }
   /* fix for IE6 */
   * .dropdown-menu {
     left: 0;
     margin-left: 0;
-    -webkit-border-radius: 0;
-       -moz-border-radius: 0;
-            border-radius: 0;
+    .border-radius(6px 0 6px 6px);
   }
 }
 
@@ -318,6 +326,7 @@
 // Typeahead
 // ---------
 .typeahead {
+  z-index: 1051;
   margin-top: 2px; // give it some space to breathe
   .border-radius(@baseBorderRadius);
 }

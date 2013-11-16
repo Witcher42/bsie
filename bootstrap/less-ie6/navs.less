@@ -24,18 +24,30 @@
 .nav li * a /* fix for IE6 */ {
   display: inline;
 }
-// .nav > li > a:hover {
-.nav li a:hover /* fix for IE6 */ {
+
+/* fix for IE6 */ 
+// .nav > li > a:hover,
+// .nav > li > a:focus {
+.nav li a:hover,
+.nav li a:focus{
   text-decoration: none;
   background-color: @grayLighter;
 }
-.nav * li a:hover /* fix for IE6 */ {
+.nav * li a:hover, /* fix for IE6 */
+.nav * li a:focus /* fix for IE6 */ {
   text-decoration: inherit;
   background-color: inherit;
 }
-.nav li * a:hover /* fix for IE6 */ {
+.nav li * a:hover, /* fix for IE6 */
+.nav li * a:focus /* fix for IE6 */ {
   text-decoration: inherit;
   background-color: inherit;
+}
+
+// Prevent IE8 from misplacing imgs
+// See https://github.com/h5bp/html5-boilerplate/issues/984#issuecomment-3985989
+.nav > li > a > img {
+  max-width: none;
 }
 
 // Redeclare pull classes because of specifity
@@ -94,22 +106,29 @@
   text-shadow: none;
   padding:0;
 }
+/* fix for IE6 */
 // .nav-list > .active > a,
-// .nav-list > .active > a:hover {
+// .nav-list > .active > a:hover,
+// .nav-list > .active > a:focus {
 .nav-list .active a,
-.nav-list .active a:hover /* fix for IE6 */ {
+.nav-list .active a:hover
+.nav-list .active a:focus {
   color: @white;
   text-shadow: 0 -1px 0 rgba(0,0,0,.2);
   background-color: @linkColor;
 }
+/* fix for IE6 */
 .nav-list * .active a,
-.nav-list * .active a:hover /* fix for IE6 */ {
+.nav-list * .active a:hover,
+.nav-list * .active a:focus {
   color: inherit;
   text-shadow: none;
   background-color: inherit;
 }
+/* fix for IE6 */
 .nav-list .active * a,
-.nav-list .active * a:hover /* fix for IE6 */ {
+.nav-list .active * a:hover,
+.nav-list .active * a:focus {
   color: inherit;
   text-shadow: none;
   background-color: inherit;
@@ -194,7 +213,8 @@
   *filter:chroma(color=@transparentIE6);
 
   .border-radius(4px 4px 0 0);
-  &:hover {
+  &:hover,
+  &:focus {
     border-color: @grayLighter @grayLighter #ddd;
   }
 }
@@ -211,7 +231,8 @@
 // .nav-tabs > .active > a,
 // .nav-tabs > .active > a:hover {
 .nav-tabs .active a,
-.nav-tabs .active a:hover {
+.nav-tabs .active a:hover,
+.nav-tabs .active a:focus {
   color: @gray;
   background-color: @bodyBackground;
   border: 1px solid #ddd;
@@ -220,7 +241,8 @@
   cursor: default;
 }
 .nav-tabs * .active a,
-.nav-tabs * .active a:hover {
+.nav-tabs * .active a:hover,
+.nav-tabs * .active a:focus {
   color:inherit;
   background-color:inherit;
   border:none;
@@ -301,7 +323,8 @@
 .nav-tabs.nav-stacked > li:last-child > a {
   .border-bottom-radius(4px);
 }
-.nav-tabs.nav-stacked > li > a:hover {
+.nav-tabs.nav-stacked > li > a:hover,
+.nav-tabs.nav-stacked > li > a:focus {
   border-color: #ddd;
   z-index: 2;
 }
@@ -420,7 +443,8 @@
   .arrow-down(8px, 4px, @linkColor);
   // *padding: 5px 0 5px;
 }
-.nav .dropdown-toggle:hover .caret {
+.nav .dropdown-toggle:hover .caret,
+.nav .dropdown-toggle:focus .caret {
   border-top-color: @linkColorHover;
   border-bottom-color: @linkColorHover;
 }
@@ -442,8 +466,10 @@
 
 // Active:hover dropdown links
 // -------------------------
-// .nav > .dropdown.active > a:hover {
-.nav .dropdown.active a:hover {
+// .nav > .dropdown.active > a:hover,
+// .nav > .dropdown.active > a:focus {
+.nav .dropdown.active a:hover,
+.nav .dropdown.active a:focus {
   cursor: pointer;
 }
 
@@ -451,18 +477,22 @@
 // -------------------------
 .nav-tabs .open .dropdown-toggle,
 .nav-pills .open .dropdown-toggle,
-// .nav > li.dropdown.open.active > a:hover {
-.nav li.dropdown-open.active a:hover {
+// .nav > li.dropdown.open.active > a:hover,
+// .nav > li.dropdown.open.active > a:focus {
+.nav li.dropdown-open.active a:hover,
+.nav li.dropdown.open.active a:focus {
   color: @white;
   background-color: @grayLight;
   border-color: @grayLight;
 }
 // .nav li.dropdown.open .caret,
 // .nav li.dropdown.open.active .caret,
-// .nav li.dropdown.open a:hover .caret {
+// .nav li.dropdown.open a:hover .caret,
+// .nav li.dropdown.open a:focus .caret {
 .nav li.dropdown-open .caret,
 .nav li.dropdown-open.active .caret,
-.nav li.dropdown-open a:hover .caret {
+.nav li.dropdown-open a:hover .caret,
+.nav li.dropdown-open a:focus .caret {
   border-top-color: @white;
   border-bottom-color: @white;
   .opacity(100);
@@ -471,7 +501,8 @@
 }
 
 // Dropdowns in stacked tabs
-.tabs-stacked .open > a:hover {
+.tabs-stacked .open > a:hover,
+.tabs-stacked .open > a:focus {
   border-color: @grayLight;
 }
 
@@ -549,7 +580,8 @@
 // .tabs-below > .nav-tabs > li > a {
 .tabs-below .nav-tabs li a {
   .border-radius(0 0 4px 4px);
-  &:hover {
+  &:hover,
+  &:focus {
     border-bottom-color: #fff;
     border-top-color: #ddd;
   }
@@ -597,11 +629,13 @@
   margin-right: -1px;
   .border-radius(4px 0 0 4px);
 }
-.tabs-left > .nav-tabs > li > a:hover {
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
   border-color: @grayLighter #ddd @grayLighter @grayLighter;
 }
 .tabs-left > .nav-tabs .active > a,
-.tabs-left > .nav-tabs .active > a:hover {
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
   border-color: #ddd transparent #ddd #ddd;
   *border-right-color: @white;
 }
@@ -616,11 +650,13 @@
   margin-left: -1px;
   .border-radius(0 4px 4px 0);
 }
-.tabs-right > .nav-tabs > li > a:hover {
+.tabs-right > .nav-tabs > li > a:hover,
+.tabs-right > .nav-tabs > li > a:focus {
   border-color: @grayLighter @grayLighter @grayLighter #ddd;
 }
 .tabs-right > .nav-tabs .active > a,
-.tabs-right > .nav-tabs .active > a:hover {
+.tabs-right > .nav-tabs .active > a:hover,
+.tabs-right > .nav-tabs .active > a:focus {
   border-color: #ddd #ddd #ddd transparent;
   *border-left-color: @white;
 }
@@ -639,13 +675,16 @@
   color: inherit;
 }
 // Nuke hover effects
-// .nav > .disabled > a:hover {
-.nav .disabled a:hover {
+// .nav > .disabled > a:hover,
+// .nav > .disabled > a:focus {
+.nav .disabled a:hover,
+.nav .disabled a:focus {
   text-decoration: none;
   background-color: transparent;
   cursor: default;
 }
-.nav * .disabled a:hover {
+.nav * .disabled a:hover,
+.nav * .disabled a:focus {
   text-decoration: underline;
   background-color: inherit;
   cursor: default;
